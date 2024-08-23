@@ -19,7 +19,7 @@ func (encryption *KerberosEncryption) Encrypt(buffer []byte) []byte {
 	encrypted := make([]byte, len(buffer))
 	encryption.cipher.XORKeyStream(encrypted, buffer)
 
-	logger.Info("Encrypt() encryption key: " + encryption.key)
+	logger.Info("Encrypt() encryption key: " + string(encryption.key))
 
 	mac := hmac.New(md5.New, []byte(encryption.key))
 	mac.Write(encrypted)
@@ -30,7 +30,7 @@ func (encryption *KerberosEncryption) Encrypt(buffer []byte) []byte {
 
 // Decrypt will decrypt the given data using Kerberos
 func (encryption *KerberosEncryption) Decrypt(buffer []byte) []byte {
-	logger.Info("Decrypt() encryption key: " + encryption.key)
+	logger.Info("Decrypt() encryption key: " + string(encryption.key))
 
 	if !encryption.Validate(buffer) {
 		logger.Error("Keberos hmac validation failed")
@@ -55,7 +55,7 @@ func (encryption *KerberosEncryption) Validate(buffer []byte) bool {
 	data := buffer[:offset]
 	checksum := buffer[offset:]
 
-	logger.Info("Validate() encryption key: " + encryption.key)
+	logger.Info("Validate() encryption key: " + string(encryption.key))
 
 	cipher := hmac.New(md5.New, []byte(encryption.key))
 	cipher.Write(data)
