@@ -1,4 +1,4 @@
-module github.com/Takabrycheri/nex-go
+module github.com/PretendoNetwork/nex-go
 
 go 1.18
 
