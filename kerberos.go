@@ -62,7 +62,7 @@ func (encryption *KerberosEncryption) Validate(buffer []byte) bool {
 	mac := cipher.Sum(nil)
 
 	logger.Info("Validate() checksum: " + string(checksum))
-	logger.Info("Validate() mac: " + mac)
+	logger.Info("Validate() mac: " + string(mac))
 
 	return bytes.Equal(mac, checksum)
 }
