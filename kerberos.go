@@ -49,8 +49,13 @@ func (encryption *KerberosEncryption) Decrypt(buffer []byte) []byte {
 
 // Validate will check the HMAC of the encrypted data
 func (encryption *KerberosEncryption) Validate(buffer []byte) bool {
+	logger.Info("Validate() buffer: " + string(buffer))
+
 	offset := len(buffer)
 	offset = offset + -0x10
+
+	logger.Info("Validate() len(buffer): " + string(len(buffer)))
+	logger.Info("Validate() offset: " + string(offset))
 
 	data := buffer[:offset]
 	checksum := buffer[offset:]
