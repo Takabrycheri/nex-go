@@ -33,7 +33,7 @@ func (encryption *KerberosEncryption) Decrypt(buffer []byte) []byte {
 	logger.Info("Decrypt() encryption key: " + string(encryption.key))
 
 	if !encryption.Validate(buffer) {
-		logger.Error("Keberos hmac validation failed")
+		logger.Error("Kerberos hmac validation failed")
 	}
 
 	offset := len(buffer)
@@ -60,6 +60,9 @@ func (encryption *KerberosEncryption) Validate(buffer []byte) bool {
 	cipher := hmac.New(md5.New, []byte(encryption.key))
 	cipher.Write(data)
 	mac := cipher.Sum(nil)
+
+	logger.Info("Validate() checksum: " + string(checksum))
+	logger.Info("Validate() mac: " + mac)
 
 	return bytes.Equal(mac, checksum)
 }
