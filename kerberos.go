@@ -32,9 +32,11 @@ func (encryption *KerberosEncryption) Encrypt(buffer []byte) []byte {
 func (encryption *KerberosEncryption) Decrypt(buffer []byte) []byte {
 	logger.Info("Decrypt() encryption key: " + string(encryption.key))
 
+	/*
 	if !encryption.Validate(buffer) {
 		logger.Error("Kerberos hmac validation failed")
 	}
+	*/
 
 	offset := len(buffer)
 	offset = offset + -0x10
